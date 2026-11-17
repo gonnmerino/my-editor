@@ -1,9 +1,9 @@
 import {menuItem, menuItemActive, menuTitle, sectionLabel} from "../utils/menuStyles.js";
 
-export default function Sidebar({tasks, onSelect, activeId, togglePinned}) {
+export default function Sidebar({notes, onSelect, activeId, togglePinned}) {
 
-  const pinnedTasks = tasks.filter(item => item.isPinned === true)
-  const unpinnedTasks = tasks.filter(item => item.isPinned === false && item.isTask === true)
+  const pinnedNotes = notes.filter(item => item.isPinned === true)
+  const unpinnedNotes = notes.filter(item => item.isPinned === false && item.isNote === true)
 
   return (
     <aside
@@ -36,13 +36,13 @@ export default function Sidebar({tasks, onSelect, activeId, togglePinned}) {
         <section>
           <h2 className={`${sectionLabel} px-2 pb-1.5`}>Fijadas</h2>
           <ul className="flex flex-col gap-px">
-            {pinnedTasks.map((task) => (
-              <li key={task.id}>
-                <button onClick={() => onSelect(task.id)} type="button" className={`${menuItem} w-full hover:bg-ink/5 ${task.id === activeId ? menuItemActive : ""}`}>
-                  <button onClick={() => togglePinned(task.id)}>
-                    <span aria-hidden="true" className="w-5 text-center text-xl text-ink-soft">🖈</span>
-                  </button>
-                  <span className={menuTitle}>{task.title}</span>
+            {pinnedNotes.map((note) => (
+              <li key={note.id} className="flex items-stretch">
+                <button onClick={() => togglePinned(note.id)} type="button" aria-label="Desfijar nota" className={`${menuItem} shrink-0 hover:bg-ink/5`}>
+                  <span aria-hidden="true" className="w-5 text-center text-xl text-ink-soft">🖈</span>
+                </button>
+                <button onClick={() => onSelect(note.id)} type="button" className={`${menuItem} min-w-0 flex-1 hover:bg-ink/5 ${note.id === activeId ? menuItemActive : ""}`}>
+                  <span className={`${menuTitle} truncate`}>{note.title}</span>
                 </button>
               </li>
             ))}
@@ -50,15 +50,15 @@ export default function Sidebar({tasks, onSelect, activeId, togglePinned}) {
         </section>
 
         <section>
-          <h2 className={`${sectionLabel} px-2 pb-1.5`}>Tareas</h2>
+          <h2 className={`${sectionLabel} px-2 pb-1.5`}>Notas</h2>
           <ul className="flex flex-col gap-px">
-            {unpinnedTasks.map((task) => (
-              <li key={task.id}>
-                <button onClick={() => onSelect(task.id)} type="button" className={`${menuItem} w-full hover:bg-ink/5 ${task.id === activeId ? menuItemActive : ""}`}>
-                  <button onClick={() => togglePinned(task.id)}>
-                    <span aria-hidden="true" className="w-5 text-center text-sm text-shadow-ink-faint">⏹</span>
-                  </button>
-                  <span className={menuTitle}>{task.title}</span>
+            {unpinnedNotes.map((note) => (
+              <li key={note.id} className="flex items-stretch">
+                <button onClick={() => togglePinned(note.id)} type="button" aria-label="Fijar nota" className={`${menuItem} shrink-0 hover:bg-ink/5`}>
+                  <span aria-hidden="true" className="w-5 text-center text-sm text-ink-soft">⏹</span>
+                </button>
+                <button onClick={() => onSelect(note.id)} type="button" className={`${menuItem} min-w-0 flex-1 hover:bg-ink/5 ${note.id === activeId ? menuItemActive : ""}`}>
+                  <span className={`${menuTitle} truncate`}>{note.title}</span>
                 </button>
               </li>
             ))}

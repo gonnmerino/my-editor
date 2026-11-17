@@ -4,20 +4,20 @@ export const initialNotes = [
     title: "Tarea casa",
     content: "Ir a comprar cosas para la casa",
     isPinned: false,
-    isTask: true,
+    isNote: true,
   },
   {
     id: "2",
     title: "Universidad",
     content: "Estudiar para parcial",
     isPinned: true,
-    isTask: true,
+    isNote: true,
   },
   {
     id: "3",
     title: "Playlist spotify",
     content: "Canciones para mi playlist nueva",
     isPinned: true,
-    isTask: true,
+    isNote: true,
   },
 ]

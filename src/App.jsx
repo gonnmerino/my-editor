@@ -1,34 +1,34 @@
 import './App.css'
 import Sidebar from "./components/Sidebar.jsx";
 import {initialNotes} from "./data/pages.js";
-import TaskView from "./components/TaskView.jsx";
+import NoteView from "./components/NoteView.jsx";
 import {useState} from "react";
 
 export default function App() {
 
-  const [activeTask, setActiveTask] = useState();
-  const [tasks, setTasks] = useState(initialNotes);
+  const [activeNote, setActiveNote] = useState();
+  const [notes, setNotes] = useState(initialNotes);
 
   const changeName = (newName) => {
-    setTasks(tasks.map((task) => task.id === activeTask ? {...task, title: newName}: task))
+    setNotes(notes.map((note) => note.id === activeNote ? {...note, title: newName}: note))
   }
   const changeContent = (newContent) => {
-    setTasks(tasks.map((task) => task.id === activeTask ? {...task, content: newContent}: task))
+    setNotes(notes.map((note) => note.id === activeNote ? {...note, content: newContent}: note))
   }
   const togglePinned = (id) => {
-    setTasks(tasks.map((task) => task.id === id ? {...task, isPinned: !task.isPinned}: task))
+    setNotes(notes.map((note) => note.id === id ? {...note, isPinned: !note.isPinned}: note))
   }
 
-  const handleActiveTask = (id) => {
+  const handleActiveNote = (id) => {
     let active = id;
-    setActiveTask(active);
+    setActiveNote(active);
     console.log(active)
   }
-  const currentTask = tasks.find(task => activeTask === task.id);
+  const currentNote = notes.find(note => activeNote === note.id);
   return (
     <div className="flex h-screen w-full bg-paper text-left text-ink">
-      <Sidebar tasks={tasks} onSelect={handleActiveTask} activeId={activeTask} togglePinned={togglePinned}/>
-      <TaskView currentTask={currentTask} changeName={changeName} changeContent={changeContent}/>
+      <Sidebar notes={notes} onSelect={handleActiveNote} activeId={activeNote} togglePinned={togglePinned}/>
+      <NoteView currentNote={currentNote} changeName={changeName} changeContent={changeContent}/>
     </div>
   );
 }

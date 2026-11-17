@@ -1,7 +1,7 @@
 import {sectionLabel} from "../utils/menuStyles.js";
 import Tiptap from "../Tiptap.jsx";
 
-export default function TaskView({currentTask, changeName, changeContent}) {
+export default function NoteView({currentNote, changeName, changeContent}) {
   return (
     <div className="flex min-w-0 flex-1 flex-col">
       <header className="flex h-12 shrink-0 items-center gap-4 border-b border-line px-7 text-[12.5px] text-ink-soft">
@@ -27,21 +27,21 @@ export default function TaskView({currentTask, changeName, changeContent}) {
       <main className="flex-1 overflow-y-auto">
         <article className="mx-auto w-full max-w-[42.5rem] px-6 pb-32 pt-14">
           <header className="mb-6">
-            <p className={`${sectionLabel} mb-3.5`}>{currentTask ? "Nota" : ""}</p>
+            <p className={`${sectionLabel} mb-3.5`}>{currentNote ? "Nota" : ""}</p>
             <h1 className="font-serif text-[3.125rem] font-medium leading-[1.05] tracking-[-0.025em] text-ink">
-              {currentTask ? (
+              {currentNote ? (
               <input
                 className="border-none outline-none"
-                value={currentTask.title}
+                value={currentNote.title}
                 onChange={(e) => changeName(e.target.value)}
               />
                 ) : (
-                  "Selecciona una tarea"
+                  "Selecciona una nota"
                 )
               }
             </h1>
           </header>
-          <Tiptap key={currentTask?.id} content={currentTask?.content} onContentChange={changeContent}/>
+          <Tiptap key={currentNote?.id} content={currentNote?.content} onContentChange={changeContent}/>
         </article>
       </main>
     </div>
