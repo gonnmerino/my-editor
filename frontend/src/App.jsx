@@ -24,11 +24,33 @@ export default function App() {
     setActiveNote(active);
     console.log(active)
   }
+
+  const deleteNote = (id) => {
+    let noteId = id;
+    setNotes(notes.filter(note => note.id !== noteId))
+
+    if(id === activeNote) {
+      setActiveNote(undefined)
+    }
+  }
+
+  const handleNewNote = () => {
+    const newNote = {
+      id: crypto.randomUUID().toString(),
+      title: "Titulo",
+      content: "Nueva nota",
+      isPinned: false,
+      isNote: true,
+    }
+    setNotes([...notes, newNote])
+    setActiveNote(newNote.id)
+  }
+
   const currentNote = notes.find(note => activeNote === note.id);
   return (
     <div className="flex h-screen w-full bg-paper text-left text-ink">
-      <Sidebar notes={notes} onSelect={handleActiveNote} activeId={activeNote} togglePinned={togglePinned}/>
-      <NoteView currentNote={currentNote} changeName={changeName} changeContent={changeContent}/>
+      <Sidebar notes={notes} onSelect={handleActiveNote} onNewNote={handleNewNote} activeId={activeNote} togglePinned={togglePinned}/>
+      <NoteView currentNote={currentNote} onDelete={deleteNote} changeName={changeName} changeContent={changeContent}/>
     </div>
   );
 }

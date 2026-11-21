@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-/* Design tokens: de aquí salen clases como text-ink, bg-wash, border-line, rounded-ui, font-serif */
 @theme {
   --color-ink: #1A1D21;
   --color-ink-soft: #5B6066;
@@ -28,7 +27,6 @@
   }
 }
 
-/* Tipografía del contenido que genera Tiptap (clase .tiptap) */
 @layer components {
   .tiptap {
     font-size: 1.0rem;
@@ -101,5 +99,23 @@
     background: rgb(26 29 33 / 0.13);
     color: inherit;
     padding: 0.05rem 0;
+  }
+
+  .scroll-soft {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(26 29 33 / 0.2) transparent;
+  }
+
+  .scroll-soft::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scroll-soft::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scroll-soft::-webkit-scrollbar-thumb {
+    background: rgb(26 29 33 / 0.2);
+    border-radius: 999px;
   }
 }

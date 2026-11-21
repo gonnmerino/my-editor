@@ -1,6 +1,6 @@
 import {menuItem, menuItemActive, menuTitle, sectionLabel} from "../utils/menuStyles.js";
 
-export default function Sidebar({notes, onSelect, activeId, togglePinned}) {
+export default function Sidebar({notes, onSelect, onNewNote, activeId, togglePinned}) {
 
   const pinnedNotes = notes.filter(item => item.isPinned === true)
   const unpinnedNotes = notes.filter(item => item.isPinned === false && item.isNote === true)
@@ -33,6 +33,11 @@ export default function Sidebar({notes, onSelect, activeId, togglePinned}) {
       </form>
 
       <nav aria-label="Páginas" className="flex flex-1 flex-col gap-6 overflow-y-auto">
+        <button onClick={() => onNewNote()} type="button" className={`${menuItem} h-10 w-full text-ink-soft hover:bg-ink/5`}>
+        <span aria-hidden="true" className="w-5 text-center text-sm text-ink-soft">+</span>
+          <span className={menuTitle}>Nueva nota</span>
+        </button>
+
         <section>
           <h2 className={`${sectionLabel} px-2 pb-1.5`}>Fijadas</h2>
           <ul className="flex flex-col gap-px">
@@ -69,14 +74,10 @@ export default function Sidebar({notes, onSelect, activeId, togglePinned}) {
       <footer className="flex items-center gap-2.5 border-t border-line px-2 pt-3 text-[13px] text-ink-soft">
         <span
           aria-hidden="true"
-          className="grid h-6 w-6 place-items-center rounded-full bg-ink text-[11px] font-semibold text-white"
-        >
+          className="grid h-6 w-6 place-items-center rounded-full bg-ink text-[11px] font-semibold text-white">
           G
         </span>
         <p>Gonzalo</p>
-        <button type="button" className="ml-auto rounded-ui-sm px-1.5 py-0.5 hover:bg-ink/5">
-          + Nueva
-        </button>
       </footer>
     </aside>
   );

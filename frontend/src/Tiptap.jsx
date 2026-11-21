@@ -4,10 +4,12 @@ import Highlight from "@tiptap/extension-highlight";
 import {SlashCommand} from "./utils/slashCommand.js";
 import {BubbleToolbar} from "./components/BubbleToolbar.jsx";
 import {Markdown} from "@tiptap/markdown";
+import TaskList from "@tiptap/extension-task-list";
+import TaskItem from "@tiptap/extension-task-item";
 
 export const Tiptap = ({content, onContentChange}) => {
     const editor = useEditor({
-        extensions: [StarterKit, Highlight, SlashCommand, Markdown],
+        extensions: [StarterKit, Highlight, SlashCommand, Markdown, TaskList, TaskItem],
         content: content,
         contentType: "markdown",
         onUpdate: ({editor}) => {

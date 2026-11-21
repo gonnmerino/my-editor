@@ -1,7 +1,7 @@
 import {sectionLabel} from "../utils/menuStyles.js";
 import Tiptap from "../Tiptap.jsx";
 
-export default function NoteView({currentNote, changeName, changeContent}) {
+export default function NoteView({currentNote, changeName, changeContent, onDelete}) {
   return (
     <div className="flex min-w-0 flex-1 flex-col">
       <header className="flex h-12 shrink-0 items-center gap-4 border-b border-line px-7 text-[12.5px] text-ink-soft">
@@ -15,9 +15,17 @@ export default function NoteView({currentNote, changeName, changeContent}) {
 
         <div className="ml-auto flex items-center gap-4">
           <p>Guardado</p>
+          {currentNote && (
+            <button
+              type="button"
+              onClick={() => onDelete(currentNote.id)}
+              className="cursor-pointer rounded-ui px-3 py-1.5 text-[12.5px] font-medium text-ink-soft transition-colors hover:bg-ink/5 hover:text-ink">
+              Eliminar
+            </button>
+          )}
           <button
             type="button"
-            className="rounded-ui bg-ink px-3 py-1.5 text-[12.5px] font-medium text-white transition-colors hover:bg-ink/85"
+            className="cursor-pointer rounded-ui bg-ink px-3 py-1.5 text-[12.5px] font-medium text-white transition-colors hover:bg-ink/85"
           >
             Compartir
           </button>
