@@ -73,14 +73,17 @@
   }
 
   .tiptap ul[data-type="taskList"] li > label {
+    display: flex;
+    align-items: center;
     flex: 0 0 auto;
-    margin-top: 0.4rem;
+    height: 1.7rem;
     user-select: none;
   }
 
   .tiptap ul[data-type="taskList"] li > label input {
     width: 1rem;
     height: 1rem;
+    margin: 0;
     cursor: pointer;
     accent-color: var(--color-ink);
   }
