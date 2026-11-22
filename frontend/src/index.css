@@ -61,6 +61,40 @@
   .tiptap ul { list-style: disc; }
   .tiptap ol { list-style: decimal; }
 
+  .tiptap ul[data-type="taskList"] {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .tiptap ul[data-type="taskList"] li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.625rem;
+  }
+
+  .tiptap ul[data-type="taskList"] li > label {
+    flex: 0 0 auto;
+    margin-top: 0.4rem;
+    user-select: none;
+  }
+
+  .tiptap ul[data-type="taskList"] li > label input {
+    width: 1rem;
+    height: 1rem;
+    cursor: pointer;
+    accent-color: var(--color-ink);
+  }
+
+  .tiptap ul[data-type="taskList"] li > div {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .tiptap ul[data-type="taskList"] li[data-checked="true"] > div {
+    color: var(--color-ink-faint);
+    text-decoration: line-through;
+  }
+
   .tiptap blockquote {
     border-left: 2px solid var(--color-ink);
     padding-left: 1rem;

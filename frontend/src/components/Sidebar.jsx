@@ -1,9 +1,11 @@
 import {menuItem, menuItemActive, menuTitle, sectionLabel} from "../utils/menuStyles.js";
+import {useAuth} from "../auth/AuthContext.jsx";
 
 export default function Sidebar({notes, onSelect, onNewNote, activeId, togglePinned}) {
+  const {user, logout} = useAuth()
 
-  const pinnedNotes = notes.filter(item => item.isPinned === true)
-  const unpinnedNotes = notes.filter(item => item.isPinned === false && item.isNote === true)
+  const pinnedNotes = notes.filter(item => item.is_active && item.is_pinned)
+  const unpinnedNotes = notes.filter(item => item.is_active && !item.is_pinned)
 
   return (
     <aside
@@ -75,9 +77,15 @@ export default function Sidebar({notes, onSelect, onNewNote, activeId, togglePin
         <span
           aria-hidden="true"
           className="grid h-6 w-6 place-items-center rounded-full bg-ink text-[11px] font-semibold text-white">
-          G
+          {user.name.charAt(0).toUpperCase()}
         </span>
-        <p>Gonzalo</p>
+        <p className="min-w-0 flex-1 truncate">{user.name}</p>
+        <button
+          type="button"
+          onClick={logout}
+          className="shrink-0 cursor-pointer rounded-ui-sm px-1.5 py-0.5 hover:bg-ink/5 hover:text-ink">
+          Cerrar sesión
+        </button>
       </footer>
     </aside>
   );

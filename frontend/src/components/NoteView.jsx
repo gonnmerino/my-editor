@@ -39,7 +39,7 @@ export default function NoteView({currentNote, changeName, changeContent, onDele
             <h1 className="font-serif text-[3.125rem] font-medium leading-[1.05] tracking-[-0.025em] text-ink">
               {currentNote ? (
               <input
-                className="border-none outline-none"
+                className="border-none outline-none h-15"
                 value={currentNote.title}
                 onChange={(e) => changeName(e.target.value)}
               />
