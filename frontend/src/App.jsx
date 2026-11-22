@@ -3,10 +3,12 @@ import Sidebar from "./components/Sidebar.jsx";
 import NoteView from "./components/NoteView.jsx";
 import {useEffect, useRef, useState} from "react";
 import {apiFetch} from "./utils/client.js";
+import ConfirmDialog from "./components/ConfirmDialog.jsx";
 
 export default function App() {
   const [activeNote, setActiveNote] = useState();
   const [notes, setNotes] = useState([]);
+  const [noteToDelete, setNoteToDelete] = useState(null);
 
   useEffect(() => {
     const loadNotes = async () => {
@@ -85,11 +87,24 @@ export default function App() {
     setActiveNote(created.id)
   }
 
+  const confirmDelete = async () => {
+    await deleteNote(noteToDelete.id)
+    setNoteToDelete(null)
+  }
+
   const currentNote = notes.find(note => activeNote === note.id);
   return (
     <div className="flex h-screen w-full bg-paper text-left text-ink">
       <Sidebar notes={notes} onSelect={handleActiveNote} onNewNote={handleNewNote} activeId={activeNote} togglePinned={togglePinned}/>
-      <NoteView currentNote={currentNote} onDelete={deleteNote} changeName={changeName} changeContent={changeContent}/>
+      <NoteView currentNote={currentNote} onDelete={() => setNoteToDelete(currentNote)} changeName={changeName} changeContent={changeContent}/>
+      <ConfirmDialog
+        open={noteToDelete !== null}
+        title="¿Eliminar nota?"
+        message={`"${noteToDelete?.title || "Sin título"}" se enviará a la papelera.`}
+        confirmLabel="Eliminar"
+        onConfirm={confirmDelete}
+        onCancel={() => setNoteToDelete(null)}
+      />
     </div>
   );
 }
