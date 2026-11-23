@@ -11,7 +11,8 @@
   },
   "scripts": {
     "start": "bun src/app.js",
-    "dev": "bun --watch src/app.js"
+    "dev": "bun --watch src/app.js",
+    "migrate": "bun scripts/migrate.js"
   },
   "private": true,
   "type": "module"

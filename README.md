@@ -24,7 +24,7 @@ App de notas estilo Notion: editor de texto enriquecido, notas fijadas, borrado 
 
 ### 1. Base de datos
 
-Crear una base vacía, por ejemplo `my_editor`. Las tablas se crean solas al arrancar el backend.
+Crear una base vacía, por ejemplo `my_editor`. Las tablas se crean con las migraciones (ver el paso 2).
 
 ### 2. Backend
 
@@ -40,6 +40,12 @@ PORT=3000
 DATABASE_URL=postgresql://USUARIO:CLAVE@localhost:5432/my_editor
 JWT_SECRET=un_texto_largo_y_aleatorio
 FRONTEND_URL=http://localhost:5173
+```
+
+Crear las tablas (se repite cada vez que se agrega una migración nueva):
+
+```bash
+bun run migrate
 ```
 
 Iniciar:
@@ -97,12 +103,13 @@ my-editor/
 └── backend/
     ├── .env                      puerto, base de datos, claves
     ├── package.json
+    ├── migrations/               esquema de la base (archivos .sql numerados)
+    ├── scripts/
+    │   └── migrate.js            aplica las migraciones pendientes
     └── src/
         ├── app.js                configura y arranca Express
         ├── db/
-        │   ├── db.js             conexión a PostgreSQL
-        │   ├── schema.js         creación de tablas
-        │   └── seed.js           datos de prueba
+        │   └── db.js             conexión a PostgreSQL
         ├── routes/
         │   ├── auth.router.js    registro, login, refresh y logout
         │   └── notes.router.js   CRUD de notas

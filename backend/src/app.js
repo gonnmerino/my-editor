@@ -1,6 +1,4 @@
 import express from "express";
-import {createSchema} from "./db/schema.js";
-import {seedDatabase} from "./db/seed.js";
 import cors from "cors";
 import notesRouter from "./routes/notes.router.js";
 import authRouter from "./routes/auth.router.js";
@@ -19,9 +17,6 @@ app.get("/api", (req, res) => {
 
 app.use("/api/v1/notes",requireAuth, notesRouter)
 app.use("/api/v1/auth", authRouter)
-
-await createSchema()
-await seedDatabase()
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
