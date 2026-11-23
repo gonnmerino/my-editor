@@ -39,7 +39,6 @@ Crear `backend/.env`:
 PORT=3000
 DATABASE_URL=postgresql://USUARIO:CLAVE@localhost:5432/my_editor
 JWT_SECRET=un_texto_largo_y_aleatorio
-FRONTEND_URL=http://localhost:5173
 ```
 
 Crear las tablas (se repite cada vez que se agrega una migración nueva):
@@ -64,7 +63,7 @@ bun install
 Crear `frontend/.env`:
 
 ```
-VITE_API_URL=http://localhost:3000/api/v1
+VITE_API_URL=/api/v1
 ```
 
 Iniciar:
