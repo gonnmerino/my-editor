@@ -3,7 +3,7 @@ import {useAuth} from "../auth/AuthContext.jsx";
 import {sectionLabel} from "../utils/menuStyles.js";
 
 const inputClass =
-  "w-full rounded-ui border border-line bg-white px-3 py-2 text-sm text-ink outline-none placeholder:text-ink-faint focus:border-ink/40";
+  "w-full rounded-ui border border-line bg-white px-3 py-2.5 text-base text-ink outline-none md:py-2 md:text-sm placeholder:text-ink-faint focus:border-ink/40";
 
 export default function AuthPage() {
   const {login, register} = useAuth();
@@ -38,7 +38,7 @@ export default function AuthPage() {
   };
 
   return (
-    <main className="grid min-h-screen place-items-center bg-paper px-6">
+    <main className="grid min-h-dvh place-items-center bg-paper px-6">
       <section className="w-full max-w-sm">
         <p className={`${sectionLabel} mb-3.5`}>my-editor</p>
         <h1 className="mb-8 font-serif text-4xl font-medium leading-tight tracking-tight text-ink">
@@ -69,13 +69,13 @@ export default function AuthPage() {
           {error && <p role="alert" className="text-sm text-ink">{error}</p>}
 
           <button type="submit" disabled={submitting}
-                  className="cursor-pointer rounded-ui bg-ink px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-ink/85 disabled:cursor-default disabled:opacity-60">
+                  className="cursor-pointer rounded-ui bg-ink px-3 py-3 text-sm font-medium text-white md:py-2 transition-colors hover:bg-ink/85 disabled:cursor-default disabled:opacity-60">
             {submitting ? "Un momento..." : isLogin ? "Entrar" : "Crear cuenta"}
           </button>
         </form>
 
         <button type="button" onClick={switchMode}
-                className="mt-6 cursor-pointer text-sm text-ink-soft hover:text-ink">
+                className="mt-4 cursor-pointer py-2 text-sm text-ink-soft hover:text-ink">
           {isLogin ? "¿No tenés cuenta? Registrate" : "¿Ya tenés cuenta? Iniciá sesión"}
         </button>
       </section>

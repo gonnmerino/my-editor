@@ -14,7 +14,4 @@ app.get("/api", (req, res) => {
 app.use("/api/v1/notes",requireAuth, notesRouter)
 app.use("/api/v1/auth", authRouter)
 
-const PORT = process.env.PORT;
-app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}...`);
-});
+export default app;

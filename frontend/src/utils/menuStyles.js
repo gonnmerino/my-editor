@@ -2,7 +2,7 @@ export const menuSurface =
   "rounded-ui border border-line bg-white/95 p-1 shadow-lg shadow-ink/10 backdrop-blur-xl";
 
 export const menuItem =
-  "flex items-center gap-2.5 cursor-pointer rounded-ui-sm px-2 py-1.5 text-left transition-colors";
+  "flex items-center gap-2.5 cursor-pointer rounded-ui-sm px-2 py-1.5 text-left transition-colors pointer-coarse:px-3 pointer-coarse:py-2.5";
 
 export const menuItemActive = "bg-ink/[0.06]";
 

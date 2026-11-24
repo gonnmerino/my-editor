@@ -26,7 +26,7 @@ const currentBlock = (editor) => {
   return "Texto";
 };
 
-const iconButton = "inline-flex h-7 min-w-7 cursor-pointer items-center justify-center rounded-ui-sm px-1.5 text-[13px] transition-colors hover:bg-ink/5";
+const iconButton = "inline-flex h-7 min-w-7 cursor-pointer pointer-coarse:h-9 pointer-coarse:min-w-9 items-center justify-center rounded-ui-sm px-1.5 text-[13px] transition-colors hover:bg-ink/5";
 
 export const BubbleToolbar = ({editor}) => {
     const [open, setOpen] = useState(false);

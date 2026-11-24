@@ -1,6 +1,6 @@
 import {Router} from "express";
 import {randomUUID} from "node:crypto";
-import bcrypt from "bcryptjs";
+import {hashPassword, verifyPassword} from "../utils/password.js";
 import {generateRefreshToken, hashToken, refreshCookieOptions, RERESH_TTL_MS, signAccessToken} from "../utils/token.js";
 import {createUserWithAccount, findUserByEmail, findUserById} from "../repositories/users.js";
 import {createRefreshToken, findRefreshTokenByHash, revokeRefreshToken, revokeFamily} from "../repositories/refreshToken.js";
@@ -14,7 +14,7 @@ router.post("/register", async (req, res) => {
     return res.status(400).json({error: "Datos inválidos. La contraseña tiene que tener al menos 8 caracteres"});
   }
 
-  const passwordHash = await bcrypt.hash(password, 12);
+  const passwordHash = await hashPassword(password);
 
   try {
     const user = await createUserWithAccount({id: randomUUID(), name, email, passwordHash});
@@ -47,7 +47,7 @@ router.post("/login", async (req, res) => {
   if(!email || !password) return res.status(400).json({error: "Faltan llenar los campos"})
 
   const user = await findUserByEmail(email)
-  const valid = user && user.password_hash ? await bcrypt.compare(password, user.password_hash) : false;
+  const valid = user && user.password_hash ? await verifyPassword(password, user.password_hash) : false;
 
   if(!valid) return res.status(401).json({error: "Email o contraseña incorrecta"})
 

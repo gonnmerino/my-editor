@@ -34,9 +34,9 @@ export default function ConfirmDialog({
       onClick={handleBackdropClick}
       aria-labelledby="confirm-title"
       aria-describedby="confirm-message"
-      className="m-auto w-full max-w-sm rounded-ui border border-line bg-white p-0 text-ink shadow-lg shadow-ink/10 backdrop:bg-ink/30"
+      className="m-auto w-[calc(100%-2rem)] max-w-sm rounded-ui border border-line bg-white p-0 text-ink shadow-lg shadow-ink/10 backdrop:bg-ink/30"
     >
-      <div className="p-6">
+      <div className="p-5 md:p-6">
         <p className={`${sectionLabel} mb-3`}>Confirmación</p>
         <h2 id="confirm-title" className="mb-2 font-serif text-2xl font-medium tracking-tight text-ink">
           {title}
@@ -49,14 +49,14 @@ export default function ConfirmDialog({
           <button
             type="button"
             onClick={onCancel}
-            className="cursor-pointer rounded-ui border border-line px-3 py-1.5 text-[13px] font-medium text-ink-soft transition-colors hover:bg-ink/5 hover:text-ink"
+            className="cursor-pointer rounded-ui border border-line px-4 py-2.5 text-[13px] font-medium text-ink-soft transition-colors hover:bg-ink/5 hover:text-ink md:px-3 md:py-1.5"
           >
             {cancelLabel}
           </button>
           <button
             type="button"
             onClick={onConfirm}
-            className="cursor-pointer rounded-ui bg-ink px-3 py-1.5 text-[13px] font-medium text-white transition-colors hover:bg-ink/85"
+            className="cursor-pointer rounded-ui bg-ink px-4 py-2.5 text-[13px] font-medium text-white transition-colors hover:bg-ink/85 md:px-3 md:py-1.5"
           >
             {confirmLabel}
           </button>

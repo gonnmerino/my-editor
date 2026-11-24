@@ -9,6 +9,7 @@ export default function App() {
   const [activeNote, setActiveNote] = useState();
   const [notes, setNotes] = useState([]);
   const [noteToDelete, setNoteToDelete] = useState(null);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
   useEffect(() => {
     const loadNotes = async () => {
@@ -58,6 +59,7 @@ export default function App() {
   const handleActiveNote = (id) => {
     let active = id;
     setActiveNote(active);
+    setSidebarOpen(false);
     console.log(active)
   }
 
@@ -71,6 +73,7 @@ export default function App() {
     setNotes((prev) => prev.map((note) => note.id === softDelete.id ? softDelete : note))
     if (id === activeNote) {
       setActiveNote(undefined)
+      setSidebarOpen(true)
     }
   }
 
@@ -85,6 +88,7 @@ export default function App() {
     const created = await res.json()
     setNotes((prev) => [...prev, created])
     setActiveNote(created.id)
+    setSidebarOpen(false)
   }
 
   const confirmDelete = async () => {
@@ -94,9 +98,9 @@ export default function App() {
 
   const currentNote = notes.find(note => activeNote === note.id);
   return (
-    <div className="flex h-screen w-full bg-paper text-left text-ink">
-      <Sidebar notes={notes} onSelect={handleActiveNote} onNewNote={handleNewNote} activeId={activeNote} togglePinned={togglePinned}/>
-      <NoteView currentNote={currentNote} onDelete={() => setNoteToDelete(currentNote)} changeName={changeName} changeContent={changeContent}/>
+    <div className="flex h-dvh w-full overflow-hidden bg-paper text-left text-ink">
+      <Sidebar notes={notes} onSelect={handleActiveNote} onNewNote={handleNewNote} activeId={activeNote} togglePinned={togglePinned} open={sidebarOpen} onClose={() => setSidebarOpen(false)}/>
+      <NoteView currentNote={currentNote} onDelete={() => setNoteToDelete(currentNote)} onOpenSidebar={() => setSidebarOpen(true)} changeName={changeName} changeContent={changeContent}/>
       <ConfirmDialog
         open={noteToDelete !== null}
         title="¿Eliminar nota?"

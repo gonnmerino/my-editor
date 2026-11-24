@@ -108,8 +108,21 @@ export const SlashCommand = Extension.create({
           const updatePosition = (clientRect) => {
             const rect = clientRect?.();
             if (!rect || !popup) return;
-            popup.style.top = `${rect.bottom + window.scrollY + 6}px`;
-            popup.style.left = `${rect.left + window.scrollX}px`;
+            const gap = 6;
+            const margin = 8;
+            const viewport = window.visualViewport;
+            const viewWidth = viewport?.width ?? window.innerWidth;
+            const viewTop = viewport?.offsetTop ?? 0;
+            const viewBottom = viewTop + (viewport?.height ?? window.innerHeight);
+            const {offsetWidth, offsetHeight} = popup;
+            const spaceBelow = viewBottom - rect.bottom - gap;
+            const spaceAbove = rect.top - viewTop - gap;
+            const placeAbove = spaceBelow < offsetHeight && spaceAbove > spaceBelow;
+            const top = placeAbove ? rect.top - offsetHeight - gap : rect.bottom + gap;
+            const maxLeft = Math.max(margin, viewWidth - offsetWidth - margin);
+            const left = Math.min(Math.max(rect.left, margin), maxLeft);
+            popup.style.top = `${top + window.scrollY}px`;
+            popup.style.left = `${left + window.scrollX}px`;
           };
 
           return {

@@ -13,7 +13,7 @@ App de notas estilo Notion: editor de texto enriquecido, notas fijadas, borrado 
 - Node/Bun + Express 5
 - PostgreSQL (`pg`)
 - Autenticación con JWT (access token) y refresh token en cookie `httpOnly`
-- `bcryptjs` para las contraseñas
+- Contraseñas con PBKDF2 (Web Crypto)
 
 ## Requisitos
 
@@ -116,5 +116,6 @@ my-editor/
         ├── middlewares/
         │   └── requireAuth.js    valida el access token
         └── utils/
+            ├── password.js       hash y verificación de contraseñas
             └── token.js          generación y hash de tokens
 ```
